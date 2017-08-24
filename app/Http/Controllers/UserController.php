@@ -7,15 +7,21 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //个人设置页面
-    public function setting()
+    public function setting (User $user)
     {
-        return view('user.setting');
+        return view('user.setting', compact('user'));
     }
-    //个人设置行为
-    public function settingStore()
+    // 个人设置行为
+    public function settingStore (User $user)
     {
-
+        $this->validate(request(),[
+            'name' => 'min:3',
+        ]);
+        $user->name = request('name');
+        $path = request('avatar')->storePublicly(md5(time()));
+        $user->avatar =  "/storage/". $path;
+        $user->save();
+        return back();
     }
 
     //个人中心页面展示
