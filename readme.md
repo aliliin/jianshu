@@ -1,5 +1,5 @@
 
-项目预览地址: www.js.phpering.com
+项目预览地址: js.phpering.com
 
 账号:name@gmail.com
 
